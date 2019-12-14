@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">NoshApp</string>
+    <string name="noshapp">NoshApp</string>
+    <string name="witaj_w_aplikacji">Witaj w aplikacji</string>
+    <string name="lista_posi_k_w">Lista posiłków</string>
+    <string name="podgl_d_posi_ku">Podgląd posiłku</string>
+    <string name="lista_zakup_w">Lista zakupów</string>
+    <string name="najbli_sza_biedronka">Najbliższa Biedronka</string>
+</resources>
