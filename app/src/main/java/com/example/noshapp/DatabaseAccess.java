@@ -11,6 +11,7 @@ public class DatabaseAccess {
     private SQLiteDatabase db;
     private static DatabaseAccess instance;
     private final String MEAL_TABLE = "MEALS";
+    private final String INGREDIENTS_TABLE = "INGREDIENTS";
 
     private DatabaseAccess(Context context){
         this.openHelper = new DatabaseOpenHelper(context);
@@ -38,6 +39,13 @@ public class DatabaseAccess {
         String query = "Select * from " + MEAL_TABLE;
         Cursor cursor = db.rawQuery(query,null );
 
+        return cursor;
+    }
+
+    public Cursor getIngredientsForMeal(int mealID){
+        open();
+        String query = "Select * from " + INGREDIENTS_TABLE + " where Meal_ID = " + mealID;
+        Cursor cursor = db.rawQuery(query,null);
         return cursor;
     }
 }

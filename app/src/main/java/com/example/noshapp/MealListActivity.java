@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.icu.text.UnicodeSetSpanner;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -21,8 +22,6 @@ public class MealListActivity extends AppCompatActivity {
 
     ArrayList<String> listItem;
     ArrayAdapter adapter;
-//    String[] listItem = new String[3];
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +31,23 @@ public class MealListActivity extends AppCompatActivity {
         lvMealList = findViewById(R.id.lvMealList);
         btnAddMeal = findViewById(R.id.btnAddMeal);
 
-//        listItem[0] = "Spaghetti bolognese";
-//        listItem[1] = "Hamburger";
-//        listItem[2] = "Pączki";
-
         listItem = new ArrayList<>();
 
         viewData();
+
+        lvMealList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String mealName = lvMealList.getItemAtPosition(position).toString();
+
+                Intent intent = new Intent(getApplicationContext(),ShowMealActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("mealName", mealName);
+                intent.putExtras(bundle);
+                startActivity(intent, bundle);
+
+            }
+        });
 
         btnAddMeal.setOnClickListener(new View.OnClickListener() {
             @Override
