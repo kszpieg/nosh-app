@@ -1,9 +1,10 @@
 package com.example.noshapp;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteOpenHelper;
 
-public class DatabaseOpenHelper extends SQLiteOpenHelper {
+import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
+
+public class DatabaseOpenHelper extends SQLiteAssetHelper {
     private static final String DATABASE_NAME = "SQLiteNoshApp.db";
     private static final int DATABASE_VERSION = 1;
 
