@@ -5,12 +5,15 @@ import java.util.List;
 public class Meal {
 
     private String name;
-    private List<Igredients> ingredients;
+    private List<Ingredients> ingredients;
     private int portions;
     private String description;
 
-    public Meal(){
-
+    public Meal(String mealName, List<Ingredients> mealIngredients, int mealPortions, String mealDescription) {
+        name = mealName;
+        ingredients = mealIngredients;
+        portions = mealPortions;
+        description = mealDescription;
     }
 
     public String getName() {
@@ -21,11 +24,11 @@ public class Meal {
         this.name = name;
     }
 
-    public List<Igredients> getIngredients() {
+    public List<Ingredients> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<Igredients> ingredients) {
+    public void setIngredients(List<Ingredients> ingredients) {
         this.ingredients = ingredients;
     }
 

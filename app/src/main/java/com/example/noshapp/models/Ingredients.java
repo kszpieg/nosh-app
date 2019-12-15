@@ -1,11 +1,18 @@
 package com.example.noshapp.models;
 
-public class Igredients {
+public class Ingredients {
 
     private String name;
     private int count;
     private String unit;
     private int idMeal;
+
+    public Ingredients(String ingredientName, int ingredientCount, String ingredientUnit, int ingredientIdMeal) {
+        name = ingredientName;
+        count = ingredientCount;
+        unit = ingredientUnit;
+        idMeal = ingredientIdMeal;
+    }
 
     public String getName() {
         return name;
