@@ -43,6 +43,7 @@ public class MealListActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),ShowMealActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("mealName", mealName);
+                bundle.putInt("mealID", position+1);
                 intent.putExtras(bundle);
                 startActivity(intent, bundle);
 

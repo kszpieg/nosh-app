@@ -1,17 +1,13 @@
 package com.example.noshapp.models;
 
-import java.util.List;
-
 public class Meal {
 
     private String name;
-    private List<Ingredients> ingredients;
     private int portions;
     private String description;
 
-    public Meal(String mealName, List<Ingredients> mealIngredients, int mealPortions, String mealDescription) {
+    public Meal(String mealName, int mealPortions, String mealDescription) {
         name = mealName;
-        ingredients = mealIngredients;
         portions = mealPortions;
         description = mealDescription;
     }
@@ -22,14 +18,6 @@ public class Meal {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Ingredients> getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(List<Ingredients> ingredients) {
-        this.ingredients = ingredients;
     }
 
     public int getPortions() {

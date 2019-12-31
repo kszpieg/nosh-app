@@ -55,7 +55,7 @@ public class DatabaseAccess {
         c.moveToFirst();
         while (!c.isAfterLast()) {
             if (c.getString(c.getColumnIndex("Name")) != null) {
-                Meal meal = new Meal(c.getString(c.getColumnIndex("Name")), getIngredientsForMeal(c.getColumnIndex("ID")), c.getInt(c.getColumnIndex("Portion")), c.getString(c.getColumnIndex("Description")));
+                Meal meal = new Meal(c.getString(c.getColumnIndex("Name")), c.getInt(c.getColumnIndex("Portion")), c.getString(c.getColumnIndex("Description")));
                 meals.add(meal);
             }
             c.moveToNext();

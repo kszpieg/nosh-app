@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.noshapp.models.Ingredients;
 import com.example.noshapp.models.Meal;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class ShowMealActivity extends AppCompatActivity {
     TextView tvMealDescriptionTitle;
 
     ArrayList<Meal> mealsFromDb = new ArrayList<>();
+    ArrayList<Ingredients> igredientsFromDb = new ArrayList<>();
     DatabaseAccess db;
 
     @Override
@@ -42,25 +44,26 @@ public class ShowMealActivity extends AppCompatActivity {
             displayDefaultTexts();
         } else {
             String mealNameFromList = bundle.getString("mealName");
-            showMeal(mealNameFromList);
+            int mealIDFromList = bundle.getInt("mealID");
+            showMeal(mealNameFromList, mealIDFromList);
         }
     }
 
-    private void showMeal(String mealNameFromList) {
+    private void showMeal(String mealNameFromList, int mealIDFromList) {
         db = DatabaseAccess.getInstance(getApplicationContext());
         db.open();
         mealsFromDb = db.getMealsFromDb();
-        String targetMealName = mealNameFromList;
+        igredientsFromDb = db.getIngredientsForMeal(mealIDFromList);
         Meal targetMeal = null;
         for (Meal meal : mealsFromDb)
         {
-            if(targetMealName.equals(meal.getName())){
+            if(mealNameFromList.equals(meal.getName())){
                 targetMeal = meal;
             }
         }
         tvMealName.setText(targetMeal.getName());
         tvMealIngredients.setText("");
-        tvMealPortions.setText(targetMeal.getPortions());
+        tvMealPortions.setText(Integer.toString(targetMeal.getPortions()));
         tvMealDescription.setText(targetMeal.getDescription());
         tvMealDescriptionTitle.setText("Opis");
     }
