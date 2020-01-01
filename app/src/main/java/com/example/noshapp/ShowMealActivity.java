@@ -74,7 +74,7 @@ public class ShowMealActivity extends AppCompatActivity {
         String ingredientsDescription = "";
         for (Ingredients ingredients : ingredientsFromDb) {
             name = ingredients.getName();
-            count = Integer.toString(ingredients.getCount());
+            count = Float.toString(ingredients.getCount());
             unit = ingredients.getUnit();
             ingredientsDescription += "• " + name + " - " + count + " " + unit + "\n";
         }

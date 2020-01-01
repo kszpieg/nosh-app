@@ -3,11 +3,11 @@ package com.example.noshapp.models;
 public class Ingredients {
 
     private String name;
-    private int count;
+    private float count;
     private String unit;
     private int idMeal;
 
-    public Ingredients(String ingredientName, int ingredientCount, String ingredientUnit, int ingredientIdMeal) {
+    public Ingredients(String ingredientName, float ingredientCount, String ingredientUnit, int ingredientIdMeal) {
         name = ingredientName;
         count = ingredientCount;
         unit = ingredientUnit;
@@ -22,11 +22,11 @@ public class Ingredients {
         this.name = name;
     }
 
-    public int getCount() {
+    public float getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(float count) {
         this.count = count;
     }
 
