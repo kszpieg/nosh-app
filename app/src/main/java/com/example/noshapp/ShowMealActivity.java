@@ -23,7 +23,7 @@ public class ShowMealActivity extends AppCompatActivity {
     TextView tvMealDescriptionTitle;
 
     ArrayList<Meal> mealsFromDb = new ArrayList<>();
-    ArrayList<Ingredients> igredientsFromDb = new ArrayList<>();
+    ArrayList<Ingredients> ingredientsFromDb = new ArrayList<>();
     DatabaseAccess db;
 
     @Override
@@ -53,19 +53,32 @@ public class ShowMealActivity extends AppCompatActivity {
         db = DatabaseAccess.getInstance(getApplicationContext());
         db.open();
         mealsFromDb = db.getMealsFromDb();
-        igredientsFromDb = db.getIngredientsForMeal(mealIDFromList);
+        ingredientsFromDb = db.getIngredientsForMeal(mealIDFromList);
         Meal targetMeal = null;
-        for (Meal meal : mealsFromDb)
-        {
-            if(mealNameFromList.equals(meal.getName())){
+        for (Meal meal : mealsFromDb) {
+            if (mealNameFromList.equals(meal.getName())) {
                 targetMeal = meal;
             }
         }
         tvMealName.setText(targetMeal.getName());
-        tvMealIngredients.setText("");
+        tvMealIngredients.setText(displayIngredients(ingredientsFromDb));
         tvMealPortions.setText(Integer.toString(targetMeal.getPortions()));
         tvMealDescription.setText(targetMeal.getDescription());
         tvMealDescriptionTitle.setText("Opis");
+    }
+
+    private String displayIngredients(ArrayList<Ingredients> ingredientsFromDb) {
+        String name;
+        String count;
+        String unit;
+        String ingredientsDescription = "";
+        for (Ingredients ingredients : ingredientsFromDb) {
+            name = ingredients.getName();
+            count = Integer.toString(ingredients.getCount());
+            unit = ingredients.getUnit();
+            ingredientsDescription += "• " + name + " - " + count + " " + unit + "\n";
+        }
+        return ingredientsDescription;
     }
 
     private void displayDefaultTexts() {
