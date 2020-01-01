@@ -40,10 +40,10 @@ public class MealListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String mealName = lvMealList.getItemAtPosition(position).toString();
 
-                Intent intent = new Intent(getApplicationContext(),ShowMealActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ShowMealActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("mealName", mealName);
-                bundle.putInt("mealID", position+1);
+                bundle.putInt("mealID", position + 1);
                 intent.putExtras(bundle);
                 startActivity(intent, bundle);
 
@@ -53,7 +53,7 @@ public class MealListActivity extends AppCompatActivity {
         btnAddMeal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent (getApplicationContext(), AddMealActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AddMealActivity.class);
                 startActivity(intent);
             }
         });
@@ -65,14 +65,14 @@ public class MealListActivity extends AppCompatActivity {
 
         Cursor cursor = databaseAccess.viewMealListData();
 
-        if(cursor.getCount()==0){
+        if (cursor.getCount() == 0) {
             Toast.makeText(this, "Brak danych", Toast.LENGTH_SHORT).show();
-        } else{
-            while(cursor.moveToNext()){
+        } else {
+            while (cursor.moveToNext()) {
                 listItem.add(cursor.getString(1));
             }
         }
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, listItem);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listItem);
         lvMealList.setAdapter(adapter);
         databaseAccess.close();
     }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
@@ -27,7 +28,10 @@ public class ShowMealActivity extends AppCompatActivity {
 
     ArrayList<Meal> mealsFromDb = new ArrayList<>();
     ArrayList<Ingredients> ingredientsFromDb = new ArrayList<>();
+    ArrayList<String> chosenMealIngredients = new ArrayList<>();
     DatabaseAccess db;
+
+    private int mealIDFromList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +53,21 @@ public class ShowMealActivity extends AppCompatActivity {
             displayDefaultTexts();
         } else {
             String mealNameFromList = bundle.getString("mealName");
-            int mealIDFromList = bundle.getInt("mealID");
+            mealIDFromList = bundle.getInt("mealID");
             showMeal(mealNameFromList, mealIDFromList);
         }
+
+        btnToDoList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),ShoppingToDoListActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putStringArrayList("ingredients", chosenMealIngredients);
+                intent.putExtras(bundle);
+                Toast.makeText(getApplicationContext(),"Dodano do listy",Toast.LENGTH_LONG).show();
+                chosenMealIngredients.clear();
+            }
+        });
     }
 
     private void showMeal(String mealNameFromList, int mealIDFromList) {
@@ -81,6 +97,7 @@ public class ShowMealActivity extends AppCompatActivity {
             name = ingredients.getName();
             count = Float.toString(ingredients.getCount());
             unit = ingredients.getUnit();
+            chosenMealIngredients.add(name + " - " + count + " " + unit);
             ingredientsDescription += "• " + name + " - " + count + " " + unit + "\n";
         }
         return ingredientsDescription;
@@ -91,6 +108,6 @@ public class ShowMealActivity extends AppCompatActivity {
         tvMealIngredients.setText("");
         tvMealPortions.setText("");
         tvMealDescription.setText("");
-        tvMealDescriptionTitle.setText("Wybierz danie");
+        tvMealDescriptionTitle.setText("Coś poszło nie tak...");
     }
 }

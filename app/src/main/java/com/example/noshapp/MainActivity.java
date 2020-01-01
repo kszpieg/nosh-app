@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnMealList, btnMeal, btnShoppingToDoList, btnShowMap;
+    Button btnMealList, btnShoppingToDoList, btnShowMap;
     TextView tvWelcome, tvAppName;
 
     @Override
