@@ -72,7 +72,7 @@ public class DatabaseAccess {
         c.moveToFirst();
         while (!c.isAfterLast()) {
             if (c.getString(c.getColumnIndex("Name")) != null) {
-                Ingredients ingredient = new Ingredients(c.getString(c.getColumnIndex("Name")), c.getInt(c.getColumnIndex("Quantity")), c.getString(c.getColumnIndex("Unit")), c.getInt(c.getColumnIndex("Meal_ID")));
+                Ingredients ingredient = new Ingredients(c.getString(c.getColumnIndex("Name")), c.getFloat(c.getColumnIndex("Quantity")), c.getString(c.getColumnIndex("Unit")), c.getInt(c.getColumnIndex("Meal_ID")));
                 ingredients.add(ingredient);
             }
             c.moveToNext();

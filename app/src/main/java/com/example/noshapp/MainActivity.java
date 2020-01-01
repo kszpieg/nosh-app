@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnMealList = findViewById(R.id.btnMealList);
-        btnMeal = findViewById(R.id.btnMeal);
         btnShoppingToDoList = findViewById(R.id.btnShoppingToDoList);
         btnShowMap = findViewById(R.id.btnShowMap);
 
@@ -30,14 +29,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent (getApplicationContext(), MealListActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        btnMeal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent (getApplicationContext(), ShowMealActivity.class);
                 startActivity(intent);
             }
         });

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,11 +17,17 @@ import java.util.ArrayList;
 
 public class ShowMealActivity extends AppCompatActivity {
 
+    private boolean ifMealWasChosen = false;
+    private String mealNameIfChosen;
+    private int mealIdIfChosen;
+
     TextView tvMealName;
     TextView tvMealIngredients;
     TextView tvMealPortions;
     TextView tvMealDescription;
     TextView tvMealDescriptionTitle;
+
+    Button btnToDoList;
 
     ArrayList<Meal> mealsFromDb = new ArrayList<>();
     ArrayList<Ingredients> ingredientsFromDb = new ArrayList<>();
@@ -37,14 +44,24 @@ public class ShowMealActivity extends AppCompatActivity {
         tvMealDescription = findViewById(R.id.tvMealDescription);
         tvMealDescriptionTitle = findViewById(R.id.tvMealDescriptionTitle);
 
+        btnToDoList = findViewById(R.id.btnToDoList);
+
         Intent myCallerIntent = getIntent();
         Bundle bundle = myCallerIntent.getExtras();
 
         if (bundle == null) {
-            displayDefaultTexts();
+            if (ifMealWasChosen) {
+                showMeal(mealNameIfChosen, mealIdIfChosen);
+            } else {
+                displayDefaultTexts();
+            }
+
         } else {
             String mealNameFromList = bundle.getString("mealName");
             int mealIDFromList = bundle.getInt("mealID");
+            mealNameIfChosen = mealNameFromList;
+            mealIdIfChosen = mealIDFromList;
+            ifMealWasChosen = true;
             showMeal(mealNameFromList, mealIDFromList);
         }
     }
