@@ -17,10 +17,6 @@ import java.util.ArrayList;
 
 public class ShowMealActivity extends AppCompatActivity {
 
-    private boolean ifMealWasChosen = false;
-    private String mealNameIfChosen;
-    private int mealIdIfChosen;
-
     TextView tvMealName;
     TextView tvMealIngredients;
     TextView tvMealPortions;
@@ -50,18 +46,10 @@ public class ShowMealActivity extends AppCompatActivity {
         Bundle bundle = myCallerIntent.getExtras();
 
         if (bundle == null) {
-            if (ifMealWasChosen) {
-                showMeal(mealNameIfChosen, mealIdIfChosen);
-            } else {
-                displayDefaultTexts();
-            }
-
+            displayDefaultTexts();
         } else {
             String mealNameFromList = bundle.getString("mealName");
             int mealIDFromList = bundle.getInt("mealID");
-            mealNameIfChosen = mealNameFromList;
-            mealIdIfChosen = mealIDFromList;
-            ifMealWasChosen = true;
             showMeal(mealNameFromList, mealIDFromList);
         }
     }
