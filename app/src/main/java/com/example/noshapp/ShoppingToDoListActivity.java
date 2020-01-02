@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -35,6 +36,16 @@ public class ShoppingToDoListActivity extends AppCompatActivity {
 
         viewData();
         setupListViewListener();
+
+        btnClearList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ingredients.clear();
+                updateIngredientsArray(ingredients);
+                adapter.notifyDataSetChanged();
+                Toast.makeText(getApplicationContext(),"Wyczyszczono listę",Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void setupListViewListener() {
@@ -64,7 +75,7 @@ public class ShoppingToDoListActivity extends AppCompatActivity {
     }
 
     private void updateIngredientsArray(ArrayList<String> array){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(array);
