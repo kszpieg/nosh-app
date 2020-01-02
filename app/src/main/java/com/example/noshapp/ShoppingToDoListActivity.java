@@ -43,7 +43,7 @@ public class ShoppingToDoListActivity extends AppCompatActivity {
                 ingredients.clear();
                 updateIngredientsArray(ingredients);
                 adapter.notifyDataSetChanged();
-                Toast.makeText(getApplicationContext(),"Wyczyszczono listę",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Wyczyszczono listę", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -62,7 +62,7 @@ public class ShoppingToDoListActivity extends AppCompatActivity {
 
     private void viewData() {
         ingredients = getIngredientsArray();
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, ingredients);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ingredients);
         lvIngredients.setAdapter(adapter);
     }
 
@@ -70,11 +70,12 @@ public class ShoppingToDoListActivity extends AppCompatActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         Gson gson = new Gson();
         String json = preferences.getString("ingredients_list", null);
-        Type type = new TypeToken<ArrayList<String>>() {}.getType();
-        return gson.fromJson(json,type);
+        Type type = new TypeToken<ArrayList<String>>() {
+        }.getType();
+        return gson.fromJson(json, type);
     }
 
-    private void updateIngredientsArray(ArrayList<String> array){
+    private void updateIngredientsArray(ArrayList<String> array) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
         Gson gson = new Gson();

@@ -5,8 +5,9 @@
     <string name="lista_posilkow">Lista posiłków</string>
     <string name="podglad_posilku">Podgląd posiłku</string>
     <string name="lista_zakupow">Lista zakupów</string>
-    <string name="najblizsza_biedronka">Najbliższa Biedronka</string>
+    <string name="znajdz_na_mapie">Znajdź na mapie</string>
     <string name="dodaj_posilek">Dodaj posiłek</string>
     <string name="zrob_liste_zakupow">Zrób listę zakupów</string>
     <string name="wyczysc_liste">Wyczyść listę</string>
+    <string name="title_activity_maps">Najbliższa Biedronka</string>
 </resources>

@@ -44,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
         btnShowMap.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //tutaj wkleić kod do mapowej klasy
+                Intent intent = new Intent (getApplicationContext(), MapsActivity.class);
+                startActivity(intent);
             }
         }));
     }
