@@ -3,8 +3,10 @@ package com.example.noshapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.noshapp.models.Ingredients;
 import com.example.noshapp.models.Meal;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -60,12 +63,16 @@ public class ShowMealActivity extends AppCompatActivity {
         btnToDoList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),ShoppingToDoListActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putStringArrayList("ingredients", chosenMealIngredients);
-                intent.putExtras(bundle);
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor editor = preferences.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(chosenMealIngredients);
+                editor.putString("ingredients_list", json);
+                editor.apply();
                 Toast.makeText(getApplicationContext(),"Dodano do listy",Toast.LENGTH_LONG).show();
                 chosenMealIngredients.clear();
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent);
             }
         });
     }
