@@ -109,7 +109,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Geocoder geocoder = new Geocoder(MapsActivity.this);
         List<Address> list = new ArrayList<>();
         try {
-            list = geocoder.getFromLocationName(searchString, 5);
+            list = geocoder.getFromLocationName(searchString, 1);
+//            list = geocoder.getFromLocationName(searchString, 5);
         } catch (IOException e) {
             //throw exception
         }
@@ -117,11 +118,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (list.size() > 0) {
             Address address = list.get(0);
             MoveCamera(new LatLng(address.getLatitude(), address.getLongitude()), DEFAULT_ZOOM, address.getAddressLine(0));
-            for (int i = 1; i < list.size(); i++) {
-                address = list.get(i);
-                makeMarkers(new LatLng(address.getLatitude(),address.getLongitude()),address.getAddressLine(0));
-            }
-
+//            for (int i = 1; i < list.size(); i++) {
+//                address = list.get(i);
+//                makeMarkers(new LatLng(address.getLatitude(),address.getLongitude()),address.getAddressLine(0));
+//            }
         }
     }
 
