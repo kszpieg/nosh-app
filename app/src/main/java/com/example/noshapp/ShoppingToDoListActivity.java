@@ -5,7 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.widget.Adapter;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -21,7 +22,7 @@ public class ShoppingToDoListActivity extends AppCompatActivity {
     ListView lvIngredients;
     Button btnClearList;
 
-    ArrayList<String> ingredientsList;
+    ArrayList<String> ingredients;
     ArrayAdapter adapter;
 
     @Override
@@ -33,11 +34,24 @@ public class ShoppingToDoListActivity extends AppCompatActivity {
         btnClearList = findViewById(R.id.btnClearList);
 
         viewData();
+        setupListViewListener();
+    }
+
+    private void setupListViewListener() {
+        lvIngredients.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                ingredients.remove(position);
+                updateIngredientsArray(ingredients);
+                adapter.notifyDataSetChanged();
+                return true;
+            }
+        });
     }
 
     private void viewData() {
-        ingredientsList = getIngredientsArray();
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,ingredientsList);
+        ingredients = getIngredientsArray();
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, ingredients);
         lvIngredients.setAdapter(adapter);
     }
 
@@ -47,5 +61,14 @@ public class ShoppingToDoListActivity extends AppCompatActivity {
         String json = preferences.getString("ingredients_list", null);
         Type type = new TypeToken<ArrayList<String>>() {}.getType();
         return gson.fromJson(json,type);
+    }
+
+    private void updateIngredientsArray(ArrayList<String> array){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = preferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(array);
+        editor.putString("ingredients_list", json);
+        editor.apply();
     }
 }
