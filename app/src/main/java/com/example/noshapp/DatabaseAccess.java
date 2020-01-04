@@ -1,5 +1,6 @@
 package com.example.noshapp;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -81,4 +82,47 @@ public class DatabaseAccess {
         return ingredients;
     }
 
+    public ArrayList<Ingredients> getAllIngredients() {
+        ArrayList<Ingredients> ingredients = new ArrayList<>();
+        open();
+        String query = "Select * from " + INGREDIENTS_TABLE;
+        Cursor c = db.rawQuery(query, null);
+        c.moveToFirst();
+        while (!c.isAfterLast()) {
+            if (c.getString(c.getColumnIndex("Name")) != null) {
+                Ingredients ingredient = new Ingredients(c.getString(c.getColumnIndex("Name")), c.getFloat(c.getColumnIndex("Quantity")), c.getString(c.getColumnIndex("Unit")), c.getInt(c.getColumnIndex("Meal_ID")));
+                ingredients.add(ingredient);
+            }
+            c.moveToNext();
+        }
+        close();
+        return ingredients;
+    }
+
+    public boolean addNewMeal(int newMealID, Meal newMeal) {
+        open();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("ID", newMealID);
+        contentValues.put("Name", newMeal.getName());
+        contentValues.put("Portion", newMeal.getPortions());
+        contentValues.put("Description", newMeal.getDescription());
+
+        long result = db.insert(MEAL_TABLE, null, contentValues);
+        close();
+        return result != -1;
+    }
+
+    public boolean addNewIngredient(Ingredients ingredients, int ingredientID) {
+        open();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("ID", ingredientID);
+        contentValues.put("Name", ingredients.getName());
+        contentValues.put("Quantity", ingredients.getCount());
+        contentValues.put("Unit", ingredients.getUnit());
+        contentValues.put("Meal_ID", ingredients.getIdMeal());
+
+        long result = db.insert(INGREDIENTS_TABLE, null, contentValues);
+        close();
+        return result != -1;
+    }
 }
