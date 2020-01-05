@@ -78,6 +78,9 @@ public class AddMealActivity extends AppCompatActivity {
                 btnRemoveMealIngredient.setOnClickListener(thisListener);
                 container.addView(addView);
 
+                etMealIngredientName.setText("");
+                etMealIngredientCount.setText("");
+                etMealIngredientUnit.setText("");
             }
         });
 
